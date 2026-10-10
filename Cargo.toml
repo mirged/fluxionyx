@@ -1,0 +1,25 @@
+[package]
+name = "fluxionyx"
+version = "0.1.0"
+edition = "2024"
+authors = ["Vladislav <mirged>"]
+description = "Composable stocks, recipes, populations, fields, and time for simulation systems"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/mirged/fluxionyx"
+documentation = "https://docs.rs/fluxionyx"
+keywords = ["gamedev", "simulation", "system-dynamics", "no-std"]
+categories = ["simulation", "game-development", "no-std"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[features]
+default = ["std"]
+std = []
+# Opt-in fixed-point resource accounting (the floating-point APIs are unchanged).
+fixed = ["dep:fixed"]
+
+[dependencies]
+libm = { version = "0.2", default-features = false }
+fixed = { version = "1.24", optional = true, default-features = false }
