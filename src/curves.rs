@@ -59,8 +59,11 @@ pub fn lerp(start: f64, end: f64, fraction: f64) -> f64 {
     (1.0 - fraction) * start + fraction * end
 }
 /// Clamped cubic interpolation with zero slope at both ends.
+///
+/// Returns 0 at `start` and 1 at `end`. Reversed edges (`start > end`) give a falling curve,
+/// matching common shader `smoothstep` usage; a zero-width interval is a step at `start`.
 pub fn smoothstep(start: f64, end: f64, value: f64) -> f64 {
-    if start >= end {
+    if start == end {
         return if value < start { 0.0 } else { 1.0 };
     }
     let t = ((value - start) / (end - start)).clamp(0.0, 1.0);

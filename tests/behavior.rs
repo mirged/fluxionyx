@@ -435,6 +435,14 @@ fn response_curves_handle_saturation_and_stable_growth() {
     close(s_curve(1e300, 0.0, 10.0), 1.0);
     close(s_curve(-1e300, 0.0, 10.0), 0.0);
     close(smoothstep(0.0, 10.0, 5.0), 0.5);
+    // reversed edges fall smoothly instead of stepping
+    close(smoothstep(10.0, 0.0, 10.0), 0.0);
+    close(smoothstep(10.0, 0.0, 5.0), 0.5);
+    close(smoothstep(10.0, 0.0, 0.0), 1.0);
+    close(smoothstep(10.0, 0.0, 2.5), smoothstep(0.0, 10.0, 7.5));
+    // zero width is a step at the edge
+    close(smoothstep(3.0, 3.0, 2.9), 0.0);
+    close(smoothstep(3.0, 3.0, 3.0), 1.0);
     let a = logistic_next(20.0, 100.0, 0.5, 2.0);
     let b = logistic_next(logistic_next(20.0, 100.0, 0.5, 1.0), 100.0, 0.5, 1.0);
     close(a, b);
